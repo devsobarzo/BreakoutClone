@@ -42,6 +42,11 @@ public class Ball : MonoBehaviour
             rigidbody2D.velocity = new Vector2(xVelocity, yVelocity) * ballSpeed;
             transform.parent = null;
             gameManager.ballIsOnPlay = true;
+
+            if(!gameManager.GameStarted)
+            {
+                gameManager.GameStarted = true;
+            }
         }
     }
 
@@ -55,11 +60,15 @@ public class Ball : MonoBehaviour
         {
             if(gameManager != null)
             {
-                rigidbody2D.velocity = Vector2.zero;
-                transform.parent = null;
-                transform.SetParent(paddle);
-                transform.localPosition = new Vector2(0, 0.45f);    
-                gameManager.ballIsOnPlay = false;
+                gameManager.PlayerLives--;
+                if(gameManager.PlayerLives > 0)
+                {
+                    rigidbody2D.velocity = Vector2.zero;
+                    transform.parent = null;
+                    transform.SetParent(paddle);
+                    transform.localPosition = new Vector2(0, 0.45f);    
+                    gameManager.ballIsOnPlay = false;
+                }
                 
             }
 
