@@ -11,9 +11,12 @@ public class GameManager : MonoBehaviour
     Ball ball;
     public int score;
     public Text scoreText;
+
     public bool ballIsOnPlay;
     float gameTime;
     bool gameStarted;
+
+    [SerializeField]UIController uiController;
 
     public int BricksOnLevel {
         get =>bricksOnLevel;
@@ -23,8 +26,10 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(GameObject.Find("Ball"));
                 gameTime = Time.time - gameTime;
-                print(gameTime);
-                print("You Win!!");
+                //print(gameTime);
+                uiController.UpdateTime(gameTime);
+                //print("You Win!!");
+                uiController.ActivateWinnerScreen();
             }
         }
     }
@@ -33,10 +38,12 @@ public class GameManager : MonoBehaviour
         get => playerLives;
         set{
             playerLives = value;
+            uiController.UpdateLives(playerLives);
             if(playerLives == 0)
             {
                 Destroy(GameObject.Find("Ball"));
-                Debug.Log("Game Over");
+                uiController.ActivateLoseScreen();
+                //Debug.Log("Game Over");
             }
         }
     }
