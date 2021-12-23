@@ -4,8 +4,37 @@ using UnityEngine;
 
 public class Paddle : MonoBehaviour
 {
-    public float paddleSpeed = 5;
+    [SerializeField] float paddleSpeed = 5;
+    [SerializeField] float xLimit = 5;
+    [SerializeField] float bigSizeTime = 10;
+    [SerializeField] GameManager gameManager; 
+    [SerializeField] GameObject bulletPrefab;
+    [SerializeField] float fireRate = 1;
+    [SerializeField] float bulletsTime = 10;
+    [SerializeField] Vector3 bulletOffset;
+    bool bulletsActive;
+    public bool BulletsActive{
+        get => bulletsActive;
+        set{
+            bulletsActive = value;
+            StartCoroutine(ShootBullets());
+            Invoke("ResetBulletsActive", bulletsTime);
+        }
+    }
+    void ResetBulletsActive()
+    {
+        bulletsActive = false;
+        gameManager.powerUpIsActive = false;
+    }
 
+    IEnumerator ShootBullets()
+    {
+        while (BulletsActive)
+        {
+           Instantiate(bulletPrefab, transform.position + bulletOffset, Quaternion.identity);
+            yield return new WaitForSeconds(fireRate);     
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +68,23 @@ public class Paddle : MonoBehaviour
             transform.position = new Vector3(-7.44f, transform.position.y, 0);
         }
 
+    }
+
+    public void IncreaseSize()
+    {
+        if(!gameManager.ballIsOnPlay)
+            return;
+        Vector3 newSize = transform.localScale;
+        newSize.x = 1.2f;
+        transform.localScale = newSize; 
+        StartCoroutine(BackToOriginalSize());
+    }
+
+    IEnumerator BackToOriginalSize()
+    {
+        yield return new WaitForSeconds(bigSizeTime);
+        transform.localScale = new Vector3(0.8f, 0.5f, 1);
+        gameManager.powerUpIsActive = false;
     }
 
 }

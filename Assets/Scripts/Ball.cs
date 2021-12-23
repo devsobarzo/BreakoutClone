@@ -14,6 +14,17 @@ public class Ball : MonoBehaviour
     GameManager gameManager;
     Transform paddle;
     private float AVelocity = 1.1f;
+    bool superBall;
+    [SerializeField] float superBallTime = 10;
+
+    public bool SuperBall{
+        get => superBall;
+        set{
+            superBall = value;
+            if(superBall)
+                StartCoroutine(ResetSuperBall());
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -52,6 +63,12 @@ public class Ball : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        if(collision.transform.CompareTag("Brick") && superBall)
+        {
+            rigidbody2D.velocity = currentVelocity;
+            return;
+        }
+
         moveDirection = Vector2.Reflect(currentVelocity, collision.GetContact(0).normal);
         rigidbody2D.velocity = moveDirection;
         audioControlller.PlaySfx(bounceSfx);
@@ -73,5 +90,12 @@ public class Ball : MonoBehaviour
             }
 
         }
+    }
+
+    IEnumerator ResetSuperBall()
+    {
+        yield return new WaitForSeconds(superBallTime);
+        gameManager.powerUpIsActive = false;
+        superBall = false;
     }
 }

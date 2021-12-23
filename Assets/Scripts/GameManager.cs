@@ -15,8 +15,10 @@ public class GameManager : MonoBehaviour
     public bool ballIsOnPlay;
     float gameTime;
     bool gameStarted;
+    public bool powerUpIsActive;
 
     [SerializeField]UIController uiController;
+    public bool powerUpOnScene;
 
     public int BricksOnLevel {
         get =>bricksOnLevel;
