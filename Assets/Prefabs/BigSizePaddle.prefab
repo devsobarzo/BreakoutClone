@@ -95,6 +95,8 @@ GameObject:
   - component: {fileID: 6456268297899127881}
   - component: {fileID: 6456268297899127880}
   - component: {fileID: 2556884997341377750}
+  - component: {fileID: 6369154966176746940}
+  - component: {fileID: 5302023883554688152}
   m_Layer: 0
   m_Name: BigSizePaddle
   m_TagString: Untagged
@@ -176,7 +178,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3fcf76fd8e084f9a8ed7c011bf8bc63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2
 --- !u!114 &2556884997341377750
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,3 +191,29 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   delay: 5
+--- !u!114 &6369154966176746940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456268297899127991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c879d1ccdd4be41d083275e0cc6f5ea2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isQuitting: 0
+--- !u!114 &5302023883554688152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6456268297899127991}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1d546c3efc5884941bb520fb470a854a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2

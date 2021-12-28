@@ -7,6 +7,7 @@ TagManager:
   - BotomLimit
   - Paddle
   - Brick
+  - Top
   layers:
   - Default
   - TransparentFX
@@ -14,8 +15,8 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Ball
+  - Bullet
   - 
   - 
   - 

@@ -7,7 +7,7 @@ public class Paddle : MonoBehaviour
     [SerializeField] float paddleSpeed = 5;
     [SerializeField] float xLimit = 5;
     [SerializeField] float bigSizeTime = 10;
-    [SerializeField] GameManager gameManager; 
+    //[SerializeField] GameManager gameManager; 
     [SerializeField] GameObject bulletPrefab;
     [SerializeField] float fireRate = 1;
     [SerializeField] float bulletsTime = 10;
@@ -24,7 +24,7 @@ public class Paddle : MonoBehaviour
     void ResetBulletsActive()
     {
         bulletsActive = false;
-        gameManager.powerUpIsActive = false;
+        GameManager.Instance.powerUpIsActive = false;
     }
 
     IEnumerator ShootBullets()
@@ -72,7 +72,7 @@ public class Paddle : MonoBehaviour
 
     public void IncreaseSize()
     {
-        if(!gameManager.ballIsOnPlay)
+        if(!GameManager.Instance.ballIsOnPlay)
             return;
         Vector3 newSize = transform.localScale;
         newSize.x = 1.2f;
@@ -84,7 +84,7 @@ public class Paddle : MonoBehaviour
     {
         yield return new WaitForSeconds(bigSizeTime);
         transform.localScale = new Vector3(0.8f, 0.5f, 1);
-        gameManager.powerUpIsActive = false;
+        GameManager.Instance.powerUpIsActive = false;
     }
 
 }

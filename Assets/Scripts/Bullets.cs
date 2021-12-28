@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullets : MonoBehaviour
 {
-    [SerializeField] float speed = 5;
+    //[SerializeField] float speed = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class Bullets : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.down * Time.deltaTime * speed);
+       // transform.Translate(Vector2.down * Time.deltaTime * speed);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -27,23 +27,16 @@ public class Bullets : MonoBehaviour
             {
                 paddle.BulletsActive = true; 
 
-                GameManager gameManager = FindObjectOfType<GameManager>();
+                //GameManager gameManager = FindObjectOfType<GameManager>();
                 
-                if(gameManager != null)
+                if(GameManager.Instance != null)
                 {
-                    gameManager.powerUpIsActive = true; 
+                    GameManager.Instance.powerUpIsActive = true; 
                 }
             }
+            Destroy(gameObject);
         }
     }
 
-    void OnDestroy()
-    {
-        GameManager gameManager = FindObjectOfType<GameManager>();
-        if(gameManager != null)
-            if(gameManager.powerUpOnScene)
-            {
-                gameManager.powerUpOnScene = false;
-            }
-    }
+   
 }

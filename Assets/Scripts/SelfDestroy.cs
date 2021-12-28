@@ -11,4 +11,9 @@ public class SelfDestroy : MonoBehaviour
     {
         Destroy(gameObject, delay);
     }
+
+    public void DestroyFromEvent()
+    {
+        Destroy(gameObject);
+    }
 }

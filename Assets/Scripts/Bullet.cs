@@ -18,12 +18,12 @@ public class Bullet : MonoBehaviour
         transform.Translate(Vector2.up * Time.deltaTime * speed);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.transform.CompareTag("Brick"))
+        if(collision.transform.CompareTag("Brick") || collision.transform.CompareTag("Top"))
         {   
-            Destroy(collision.gameObject);
             Destroy(gameObject);
         }
+
     }
 }

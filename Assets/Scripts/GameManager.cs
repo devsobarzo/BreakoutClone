@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+
+    public static GameManager Instance; //Singleton patron.   
+
     int bricksOnLevel;
     [SerializeField]int playerLives = 3;
 
@@ -19,6 +22,14 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]UIController uiController;
     public bool powerUpOnScene;
+
+    private void Awake()
+    {
+        if(Instance == null)
+        {
+            Instance = this;
+        }
+    }
 
     public int BricksOnLevel {
         get =>bricksOnLevel;
@@ -62,6 +73,12 @@ public class GameManager : MonoBehaviour
     {
         score += 100;
         scoreText.text = "Score: " +score;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        Application.Quit();
     }
 
 

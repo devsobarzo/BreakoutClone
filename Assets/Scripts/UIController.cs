@@ -12,6 +12,14 @@ public class UIController : MonoBehaviour
     [SerializeField]GameObject[] hearts;
     [SerializeField] Text timeText;
 
+    [SerializeField] AudioSource audioSource;
+    [SerializeField] AudioClip bottonPressedSfx;
+
+    [SerializeField] GameObject buttonTryAgain;
+    [SerializeField] GameObject buttonMainMenu;
+
+
+
     public void ActivateLoseScreen()
     {
         loseScreen.SetActive(true);
@@ -43,11 +51,31 @@ public class UIController : MonoBehaviour
         }
     }
 
-
-
     public void UpdateTime(float gameTime)
     {
         timeText.text = "Time: " + Mathf.Floor(gameTime);
     }
+
+    public void LoadTryAgain(float delayTA)
+    {
+        audioSource.clip = bottonPressedSfx;
+        audioSource.Play();
+        Invoke("TryAgain", delayTA);
+    }
+
+
+    public void LoadMenu(float delayM)
+    {
+        audioSource.clip = bottonPressedSfx;
+        audioSource.Play();
+        Invoke("Menu", delayM);
+    }
+
+
+    public void PlaySfx()
+    {
+        audioSource.PlayOneShot(bottonPressedSfx);
+    }
+
 
 }

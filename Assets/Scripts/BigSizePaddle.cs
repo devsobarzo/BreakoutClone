@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class BigSizePaddle : MonoBehaviour
 {
-    [SerializeField] float speed = 5;
+    //[SerializeField] float speed = 5;
 
     private void Update()
     {
-        transform.Translate(Vector2.down * Time.deltaTime * speed);
+       // transform.Translate(Vector2.down * Time.deltaTime * speed);
     }
 
 
@@ -23,17 +23,17 @@ public class BigSizePaddle : MonoBehaviour
                 paddle.IncreaseSize();
             }
 
-            GameManager gameManager = FindObjectOfType<GameManager>();
+           // GameManager gameManager = FindObjectOfType<GameManager>();
             
-            if(gameManager != null)
+            if(GameManager.Instance != null)
             {
-               gameManager.powerUpIsActive = true; 
+               GameManager.Instance.powerUpIsActive = true; 
             }
 
             Destroy(gameObject);
         }
     }
-
+/*
     void OnDestroy()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
@@ -42,5 +42,5 @@ public class BigSizePaddle : MonoBehaviour
             {
                 gameManager.powerUpOnScene = false;
             }
-    }
+    }*/
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SuperBall : MonoBehaviour
 {
-    [SerializeField] float speed = 5;
+//    [SerializeField] float speed = 5;
 
     // Start is called before the first frame update
     void Start()
@@ -15,7 +15,7 @@ public class SuperBall : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.Translate(Vector2.down * Time.deltaTime * speed);
+      //  transform.Translate(Vector2.down * Time.deltaTime * speed);
 
     }
 
@@ -29,17 +29,17 @@ public class SuperBall : MonoBehaviour
                 ball.SuperBall = true;
             }
 
-            GameManager gameManager = FindObjectOfType<GameManager>();
+           // GameManager gameManager = FindObjectOfType<GameManager>();
             
-            if(gameManager != null)
+            if(GameManager.Instance != null)
             {
-               gameManager.powerUpIsActive = true; 
+               GameManager.Instance.powerUpIsActive = true; 
             }
             
             Destroy(gameObject);
         }
     } 
-    
+    /*
       void OnDestroy()
     {
         GameManager gameManager = FindObjectOfType<GameManager>();
@@ -49,5 +49,5 @@ public class SuperBall : MonoBehaviour
                 gameManager.powerUpOnScene = false;
             }
     }
-
+*/
 }

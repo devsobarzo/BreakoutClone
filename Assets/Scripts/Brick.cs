@@ -4,36 +4,46 @@ using UnityEngine;
 
 public class Brick : MonoBehaviour
 {
-    GameManager gameManager;
+    //GameManager gameManager;
     [SerializeField]GameObject explosion;
     [SerializeField] GameObject[] powerUpsPrefebs;
     [SerializeField] int powerUpChance = 20;
+    [SerializeField] bool isQuitting;
 
     private void Start()
     {
 
-        gameManager = FindObjectOfType<GameManager>();
-        if(gameManager != null)
+        // = FindObjectOfType<GameManager>();
+        if(GameManager.Instance != null)
         {
-            gameManager.BricksOnLevel++;
+            GameManager.Instance.BricksOnLevel++;
         }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(gameManager != null)
+        if(GameManager.Instance != null)
         {
-            gameManager.BricksOnLevel--;
-            gameManager.UpdateScore(); //Comented 22-12-2021
+            GameManager.Instance.BricksOnLevel--;
+            GameManager.Instance.UpdateScore(); //Comented 22-12-2021
         }
         Instantiate(explosion, transform.position, Quaternion.identity);
         Destroy(gameObject);
     }
 
-    
+   
+    void OnApplicationQuit()
+    {   
+        isQuitting = true;
+    }
+
+
     private void OnDestroy()
     {
-        if(gameManager.powerUpOnScene)
+        if(isQuitting)
+            return;
+        
+        if(GameManager.Instance.powerUpOnScene)
             return;
             
         int possibillity = Random.Range(0, 100);
@@ -42,7 +52,7 @@ public class Brick : MonoBehaviour
         {
             int randomPowerUp = Random.Range(0, powerUpsPrefebs.Length);
             Instantiate(powerUpsPrefebs[randomPowerUp], transform.position, Quaternion.identity);
-            gameManager.powerUpOnScene = true;
+            GameManager.Instance.powerUpOnScene = true;
         }
 
     }
